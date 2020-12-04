@@ -19,6 +19,7 @@ tabela=[]
 for proc in procs:
     dados={}
     coluna=proc.split(', ')
+    dados['pid']=len(tabela)
     dados['tempo_inic']=int(coluna[0])
     dados['prior']=int(coluna[1])
     dados['tempo_proc']=int(coluna[2])
@@ -37,6 +38,10 @@ for item in tabela:
     tempos_proc=tempos_proc+[item['tempo_proc']]
 
 print(tempos_proc)
+
+tabela[1]['prior']
+tabela[:]['prior']
+
 
 
 
