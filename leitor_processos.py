@@ -3,8 +3,11 @@
 #endereco ='C:\Users\Fernando Windows\Documents'
 import os
 
-if os.getcwd() != os.path.join('C:\\','Users','Fernando Windows','Documents'):
-    os.chdir(os.path.join('C:\\','Users','Fernando Windows','Documents'))
+#endereco ='C:\Users\Fernando Windows\Documents'
+endereco ='/Users/gabrieltomaz/Documents/UnB/1:2020/ISO/Trabalho/pseudo_SO'
+if os.getcwd() != os.path.join(endereco):
+    os.chdir(os.path.join(endereco))
+
 
 arquivo = 'processes.txt'
 
