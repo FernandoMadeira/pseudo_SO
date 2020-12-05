@@ -3,12 +3,12 @@
 import os
 
 
-def ler_arquivo(endereco, nmarquivo):
+def ler_arquivo(endereco, arquivo):
 
     if os.getcwd() != os.path.join(endereco):
         os.chdir(os.path.join(endereco))
 
-    linhasarq = open(nmarquivo)
+    linhasarq = open(arquivo)
 
     linhas = linhasarq.readlines()
 
@@ -51,15 +51,10 @@ def ler_tabs(linhas):
         tab=tab+[dados]
     return tab
 
+def main(endereco, arquivo):
+    linhas = ler_arquivo(endereco, arquivo)
+    tabela = ler_tabelas(linhas)
+    tab = ler_tabs(linhas)
 
-#endereco ='C:\Users\Fernando Windows\Documents'
-endereco = '/Users/gabrieltomaz/Documents/UnB/1:2020/ISO/Trabalho/pseudo_SO'
-arquivo = 'files.txt'
-
-linhas = ler_arquivo(endereco, arquivo)
-tabela = ler_tabelas(linhas)
-tab = ler_tabs(linhas)
-
-print(tabela)
-
-print(tab)
+    print(tabela)
+    print(tab)
