@@ -6,8 +6,8 @@ import gestor_filas
 
 
 def main():
-    #endereco = os.path.join('C:\\','Users','Fernando Windows','Documents','Github','pseudo_SO')
-    endereco = '/Users/gabrieltomaz/Documents/UnB/1:2020/ISO/Trabalho/pseudo_SO'
+    endereco = os.path.join('C:\\','Users','Fernando Windows','Documents','Github','pseudo_SO')
+    #endereco = '/Users/gabrieltomaz/Documents/UnB/1:2020/ISO/Trabalho/pseudo_SO'
     arquivo = 'files.txt'
     arquivo_processos = 'processes.txt'
 
