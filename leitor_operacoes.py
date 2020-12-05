@@ -12,6 +12,8 @@ def ler_arquivo(endereco, arquivo):
 
     linhas = linhasarq.readlines()
 
+    linhasarq.close()
+
     return linhas
 
 def ler_tabelas(linhas):
@@ -56,5 +58,10 @@ def main(endereco, arquivo):
     tabela = ler_tabelas(linhas)
     tab = ler_tabs(linhas)
 
+    print('Arquivos')
     print(tabela)
+
+    print('Operacoes')
     print(tab)
+    
+    return tabela
