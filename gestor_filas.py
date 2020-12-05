@@ -16,9 +16,9 @@
 #print('insira a quantidade de processos')
 #qtd=int(input())
 
-pids=[5,4,8,2,3]
-prioridade=[0,1,2,1,0]
-tempo_ini=[3,2,1,4,5]
+#pids=[5,4,8,2,3]
+#prioridade=[0,1,2,1,0]
+#tempo_ini=[3,2,1,4,5]
 #processos = {'n':nome,'p':prioridade}
 #processos.keys()
 #processos.values()
@@ -26,37 +26,48 @@ tempo_ini=[3,2,1,4,5]
 #prioridade1 = prioridade.sort()
 
 
-procs=[]
-for i in range(len(pids)):
-    procs.append({'pid':pids[i],'prioridade':prioridade[i],'tempo_inic':tempo_ini[i]})
+#procs=[]
+#for i in range(len(pids)):
+#    procs.append({'pid':pids[i],'prioridade':prioridade[i],'tempo_inic':tempo_ini[i]})
 
 
 #procsord = sorted(procs, key='prioridade')
-procsord = sorted(procs, key=lambda row:row['prioridade'])
+#procsord = sorted(procs, key=lambda row:row['prioridade'])
 #procsfiltrados
-0 in procs[1].values()
+#0 in procs[1].values()
 #procsfiltrados = {k: v for k,v in procs.items()}
-procsfiltrados = []
+#procsfiltrados = []
 
-procs[2]['prioridade']
+#procs[2]['prioridade']
 
 
 #tempo real:
-procstemporeal = []
-for i in range(len(procs)):
-    if procs[i]['prioridade']==0:
-        procstemporeal = procstemporeal + [procs[i]]
+def temporeal(procs):
+    procstemporeal = []
+    for i in range(len(procs)):
+        if procs[i]['prioridade']==0:
+            procstemporeal = procstemporeal + [procs[i]]
+    return procstemporeal
 
 #usuario:
-procsusuario = []
-for i in range(len(procs)):
-    if procs[i]['prioridade'] in [1,2,3]:
-        procsusuario.append(procs[i])
+def usuario(procs):
+    procsusuario = []
+    for i in range(len(procs)):
+        if procs[i]['prioridade'] in [1,2,3]:
+            procsusuario.append(procs[i])
+    return procsusuario
 
 #problema prioridade
-procsproblema = []
-for i in range(len(procs)):
-    if procs[i]['prioridade'] not in [0,1,2,3]:
-        procsproblema.append(procs[i])
+def problema(procs):
+    procsproblema = []
+    for i in range(len(procs)):
+        if procs[i]['prioridade'] not in [0,1,2,3]:
+            procsproblema.append(procs[i])
+    return procsproblema
 
+def imprime(procs):
+    print('------------ Processos Tempo Real    --------------')
+    print(temporeal(procs))
+    print('------------ Processos Usuario       --------------')
+    print(usuario(procs))
 
