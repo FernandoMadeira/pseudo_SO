@@ -43,7 +43,7 @@ def ler_tabs(linhas):
     for lin in linhas[(segmentos+2):]:
         dados = {}
         coluna = lin.split(', ')
-        dados['proc'] = coluna[0]
+        dados['pid'] = int(coluna[0])
         dados['oper'] = coluna[1]
         dados['arq'] = coluna[2].rstrip('\n')
         if int(dados['oper']) == 0:
