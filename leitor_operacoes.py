@@ -1,6 +1,7 @@
 #leitor lista operacoes
 
 import os
+import gerenciador_memoria
 
 
 def ler_arquivo(endereco, arquivo):
@@ -15,6 +16,7 @@ def ler_arquivo(endereco, arquivo):
     linhasarq.close()
 
     return linhas
+
 
 def ler_tabelas(linhas):
 
@@ -36,6 +38,7 @@ def ler_tabelas(linhas):
 
     return tabela1
 
+
 def ler_tabs(linhas):
 
     tab = []
@@ -50,18 +53,35 @@ def ler_tabs(linhas):
         dados['arq'] = coluna[2].rstrip('\n')
         if int(dados['oper']) == 0:
             dados['blocos']=coluna[3].rstrip('\n')
-        tab=tab+[dados]
+        tab = tab+[dados]
     return tab
+
+
+def get_blocos(linhas):
+
+    blocos = int(linhas[0])
+
+    return blocos
+
 
 def main(endereco, arquivo):
     linhas = ler_arquivo(endereco, arquivo)
     tabela = ler_tabelas(linhas)
     tab = ler_tabs(linhas)
+    blocos = get_blocos(linhas)
 
-    print('Arquivos')
-    print(tabela)
+    print(' ---------------- Inicializando Espaco de Memoria ---------------- ')
+    bloco_memoria = gerenciador_memoria.criar_espaco_memoria(blocos)
+    if not bloco_memoria:
+        exit()
 
-    print('Operacoes')
-    print(tab)
+    print(' ---------------- Preenchendo espacos na Memmória ---------------- ')
+    gerenciador_memoria.processar_operacoes_memoria(tabela)
+
+    # print('Arquivos')
+    # print(tabela)
+    #
+    # print('Operacoes')
+    # print(tab)
     
     return tabela

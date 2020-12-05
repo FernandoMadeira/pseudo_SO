@@ -1,15 +1,29 @@
 memoria = []
 
 
-def criar_espaco_memoria(memoria = memoria):
+def criar_espaco_memoria(blocos, memoria = memoria):
+    print(' ---------- CRIANDO ESPACO DE MEMORIA! ---------- ')
+    if blocos <= 1024:
+        for i in range(blocos):
+            memoria.append([0])
 
-    for i in range(12):
-        memoria.append([0])
+        print(' ---------- ESPACO DE MEMORIA CRIADO COM SUCESSO! ---------- ')
+        return True
+    else:
+        print(' ---------- ESPACO DE MEMORIA MAIOR QUE O SUPORTADO! ---------- ')
+        return False
 
-    return memoria
+
+def inicializar_espaco_memoria(segmentos):
+    print(' ---------- INIALIZANDO ESPACOS DE MEMORIA! ---------- ')
+    for posicao in range(segmentos):
+        escrever_memoria(posicao, [1])
+
+    print(' ---------- MEMORIA INICIALIZADA COM SUCESSO! ---------- ')
+    return True
 
 
-def escrever_memoria(posicao, palavra , memoria = memoria):
+def escrever_memoria(posicao, palavra, memoria = memoria):
 
     memoria[posicao] = palavra
 
@@ -36,8 +50,6 @@ def verificar_memoria(bl_inicio, bl_tam, memoria = memoria):
 def processar_operacoes_memoria(operacoes):
 
     for opr in operacoes:
-        print('------- opr ----- ')
-        print(opr)
         if verificar_memoria(opr['bl_inicio'], opr['bl_tam']):
             escrever_bloco_memoria(opr['bl_inicio'], opr['bl_tam'], opr['arq'])
             print('Arquivo salvo')
