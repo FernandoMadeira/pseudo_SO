@@ -1,16 +1,24 @@
+import os
 import leitor_operacoes
 import leitor_processos
 import gerenciador_memoria
+import gestor_filas
 
 
 def main():
-    # endereco ='C:\Users\Fernando Windows\Documents'
-    endereco = '/Users/gabrieltomaz/Documents/UnB/1:2020/ISO/Trabalho/pseudo_SO'
+    endereco = os.path.join('C:\\','Users','Fernando Windows','Documents','Github','pseudo_SO')
+    #endereco = '/Users/gabrieltomaz/Documents/UnB/1:2020/ISO/Trabalho/pseudo_SO'
     arquivo = 'files.txt'
     arquivo_processos = 'processes.txt'
 
     print(' ------------ Lendo Processos      ---------------- ')
+    processos = leitor_processos.ler_arquivo(endereco, arquivo)
+    tabela_processos = leitor_processos.montar_tabela_processos(processos)
     leitor_processos.main(endereco, arquivo_processos)
+
+
+    gestor_filas.imprime(tabela_processos)
+    #print(gestor_filas.temporeal(tabela_processos))
 
     print(' ------------ Lendo Operacoes      ---------------- ')
     operacoes = leitor_operacoes.main(endereco, arquivo)
