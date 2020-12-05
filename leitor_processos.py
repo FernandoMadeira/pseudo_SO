@@ -12,6 +12,8 @@ def ler_arquivo(endereco, arquivo):
 
     procs = lista_proc.readlines()
 
+    lista_proc.close()
+
     return procs
 
 def montar_tabela_processos(procs):
@@ -31,31 +33,16 @@ def montar_tabela_processos(procs):
         dados['cod_impr'] = coluna[4]
         dados['req_scan'] = coluna[5]
         dados['req_modem'] = coluna[6]
-        dados['cod_disco'] = coluna[7]
+        dados['cod_disco'] = coluna[7].rstrip('\n')
         tabela = tabela+[dados]
-        # tabela[1]['prior']
-        # tabela[:]['prior']
-
-
 
     return tabela
-
-def tempos_processamento(tabela):
-
-    tempos_proc = []
-
-    for item in tabela:
-        tempos_proc = tempos_proc+[item['tempo_proc']]
-
-    return tempos_proc
 
 
 def main(endereco, arquivo):
 
     processos = ler_arquivo(endereco, arquivo)
     tabela_processos = montar_tabela_processos(processos)
-    tempos_proc = tempos_processamento(tabela_processos)
 
     print(tabela_processos)
-    print(tempos_proc)
     #pprint.pprint(tempos_proc)
