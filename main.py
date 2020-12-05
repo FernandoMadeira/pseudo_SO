@@ -12,7 +12,7 @@ def main():
     arquivo_processos = 'processes.txt'
 
     print(' ------------ Lendo Processos      ---------------- ')
-    processos = leitor_processos.ler_arquivo(endereco, arquivo)
+    processos = leitor_processos.ler_arquivo(endereco, arquivo_processos)
     tabela_processos = leitor_processos.montar_tabela_processos(processos)
     leitor_processos.main(endereco, arquivo_processos)
 
