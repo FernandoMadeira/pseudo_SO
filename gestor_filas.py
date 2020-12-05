@@ -45,7 +45,7 @@
 def temporeal(procs):
     procstemporeal = []
     for i in range(len(procs)):
-        if procs[i]['prioridade']==0:
+        if procs[i]['prior']==0:
             procstemporeal = procstemporeal + [procs[i]]
     return procstemporeal
 
@@ -53,7 +53,7 @@ def temporeal(procs):
 def usuario(procs):
     procsusuario = []
     for i in range(len(procs)):
-        if procs[i]['prioridade'] in [1,2,3]:
+        if procs[i]['prior'] in [1,2,3]:
             procsusuario.append(procs[i])
     return procsusuario
 
@@ -61,7 +61,7 @@ def usuario(procs):
 def problema(procs):
     procsproblema = []
     for i in range(len(procs)):
-        if procs[i]['prioridade'] not in [0,1,2,3]:
+        if procs[i]['prior'] not in [0,1,2,3]:
             procsproblema.append(procs[i])
     return procsproblema
 
