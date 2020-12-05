@@ -22,17 +22,17 @@ def ler_tabelas(linhas):
 
     segmentos = int(linhas[1])
 
-    tabela=[]
+    tabela1=[]
 
     for lin in linhas[2:(segmentos+2)]:
         dados={}
         coluna=lin.split(', ')
         dados['arq']=coluna[0]
         dados['bl_inicio']=int(coluna[1])
-        dados['bl_tam']=int(coluna[2])
-        tabela=tabela+[dados]
+        dados['bl_tam']=int(coluna[2].rstrip('\n'))
+        tabela1=tabela1+[dados]
 
-    return tabela
+    return tabela1
 
 def ler_tabs(linhas):
 
@@ -45,9 +45,9 @@ def ler_tabs(linhas):
         coluna = lin.split(', ')
         dados['proc'] = coluna[0]
         dados['oper'] = coluna[1]
-        dados['arq'] = coluna[2]
+        dados['arq'] = coluna[2].rstrip('\n')
         if int(dados['oper']) == 0:
-            dados['blocos']=coluna[3]
+            dados['blocos']=coluna[3].rstrip('\n')
         tab=tab+[dados]
     return tab
 
