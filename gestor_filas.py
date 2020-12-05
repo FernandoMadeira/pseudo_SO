@@ -49,6 +49,12 @@ def temporeal(procs):
             procstemporeal = procstemporeal + [procs[i]]
     return procstemporeal
 
+#FIFO nao preemptivo tempo real:
+def fifo(procs):
+    procsord = sorted(procs, key=lambda row:row['tempo_inic'])
+    return procsord 
+#procstemporealord = sorted(procstemporeal, key=lambda row:row['tempo_inic'])
+
 #usuario:
 def usuario(procs):
     procsusuario = []
@@ -66,8 +72,9 @@ def problema(procs):
     return procsproblema
 
 def imprime(procs):
-    print('------------ Processos Tempo Real    --------------')
-    print(temporeal(procs))
+    print('------------ Processos Tempo Real Ordenados FIFO---')
+    print(fifo(temporeal(procs)))
     print('------------ Processos Usuario       --------------')
     print(usuario(procs))
+    print('------------ ----------------------- --------------')
 
