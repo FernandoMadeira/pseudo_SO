@@ -78,6 +78,14 @@ def main(endereco, arquivo):
     print(' ---------------- Preenchendo espacos na Memmória ---------------- ')
     gerenciador_memoria.processar_operacoes_memoria(tabela)
 
+    if gerenciador_memoria.verifica_espaco_memoria_disponivel(3):
+        posicoes = gerenciador_memoria.get_espaco_memoria_disponivel(3)
+        if posicoes != 0:
+            gerenciador_memoria.escrever_bloco_memoria_em_lote(posicoes, 'A')
+    else:
+        print('Erro! Memoria insuficiente!')
+
+
     # print('Arquivos')
     # print(tabela)
     #
