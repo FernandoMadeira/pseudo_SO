@@ -49,6 +49,15 @@ def tempos_processamento(tabela):
 
     return tempos_proc
 
+def lista_atributo(tabela, campo):
+
+    atributo = []
+
+    for item in tabela:
+        atributo = atributo + [item[campo]]
+
+    return atributo
+
 
 def main(endereco, arquivo):
 
