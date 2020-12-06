@@ -27,14 +27,14 @@ def ler_tabelas(linhas):
 
     segmentos = int(linhas[1])
 
-    tabela1=[]
+    tabela1 = []
 
     for lin in linhas[2:(segmentos+2)]:
-        dados={}
-        coluna=lin.split(', ')
-        dados['arq']=coluna[0]
-        dados['bl_inicio']=int(coluna[1])
-        dados['bl_tam']=int(coluna[2].rstrip('\n'))
+        dados = {}
+        coluna = lin.split(', ')
+        dados['arq'] = coluna[0]
+        dados['bl_inicio'] = int(coluna[1])
+        dados['bl_tam'] = int(coluna[2].rstrip('\n'))
         tabela1=tabela1+[dados]
 
     return tabela1
@@ -64,9 +64,11 @@ def get_blocos(linhas):
 
     return blocos
 
+
 #fazer uma função ADICIONAR PROCESSO EM MEMÓRIA: ok
-def tem_memoria(proc,processos,t):
-    processo_usuario == proc['prior'] in [1,2,3]
+def adicionar_processo_memoria(proc,processos,t):
+
+    processo_usuario = proc['prior'] in [1, 2, 3]
     if gerenciador_memoria.verifica_espaco_memoria_disponivel(proc['blocos'], processo_usuario):
         posicoes_mem = gerenciador_memoria.get_espaco_memoria_disponivel(proc['blocos'], processo_usuario)
         if posicoes_mem != 0:
@@ -75,7 +77,6 @@ def tem_memoria(proc,processos,t):
         else:
             print('Erro! Memoria insuficiente!')
             return False
-
 
 
 def main(endereco, arquivo):
