@@ -2,6 +2,7 @@
 
 import os
 import gerenciador_memoria
+import gerenciador_arquivo
 
 
 def ler_arquivo(endereco, arquivo):
@@ -70,21 +71,40 @@ def main(endereco, arquivo):
     tab = ler_tabs(linhas)
     blocos = get_blocos(linhas)
 
-    print(' ---------------- Inicializando Espaco de Memoria ---------------- ')
-    bloco_memoria = gerenciador_memoria.criar_espaco_memoria(blocos)
-    if not bloco_memoria:
+    print(' ---------------- Inicializando Memoria ---------------- ')
+    blocos_memoria_ativo = gerenciador_memoria.criar_espaco_memoria()
+    if not blocos_memoria_ativo:
         exit()
 
-    print(' ---------------- Preenchendo espacos na Memmória ---------------- ')
-    gerenciador_memoria.processar_operacoes_memoria(tabela)
+    # if gerenciador_memoria.verifica_espaco_memoria_disponivel(64, False):
+    #     posicoes_mem = gerenciador_memoria.get_espaco_memoria_disponivel(64, False)
+    #     if posicoes_mem != 0:
+    #         gerenciador_memoria.escrever_bloco_memoria_em_lote(posicoes_mem, '1')
+    # else:
+    #     print('Erro! Memoria insuficiente!')
 
-    if gerenciador_memoria.verifica_espaco_memoria_disponivel(3):
-        posicoes = gerenciador_memoria.get_espaco_memoria_disponivel(3)
+    print(' ---------------- Inicializando DISCO ---------------- ')
+    bloco_disco = gerenciador_arquivo.criar_blocos_disco(blocos)
+    if not bloco_disco:
+        exit()
+
+    print(' ---------------- Preenchendo espacos em Disco ---------------- ')
+    gerenciador_arquivo.processar_operacoes_disco(tabela)
+
+    if gerenciador_arquivo.verifica_espaco_disco_disponivel(3):
+        posicoes = gerenciador_arquivo.get_espaco_disco_disponivel(3)
         if posicoes != 0:
-            gerenciador_memoria.escrever_bloco_memoria_em_lote(posicoes, 'A')
+            gerenciador_arquivo.escrever_bloco_disco_em_lote(posicoes, 'A')
     else:
         print('Erro! Memoria insuficiente!')
 
+    print(' ---------------- Memoria ---------------- ')
+    memoria_atual = gerenciador_memoria.get_bloco_memoria_all()
+    print(memoria_atual)
+
+    print(' ---------------- Disco ---------------- ')
+    disco_atual = gerenciador_arquivo.get_bloco_disco_all()
+    print(disco_atual)
 
     # print('Arquivos')
     # print(tabela)
