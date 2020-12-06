@@ -31,7 +31,7 @@ def montar_tabela_processos(procs):
         dados['cod_impr'] = coluna[4]
         dados['req_scan'] = coluna[5]
         dados['req_modem'] = coluna[6]
-        dados['cod_disco'] = coluna[7]
+        dados['cod_disco'] = coluna[7].rstrip('\n')
         tabela = tabela+[dados]
         # tabela[1]['prior']
         # tabela[:]['prior']
@@ -65,6 +65,13 @@ def main(endereco, arquivo):
     tabela_processos = montar_tabela_processos(processos)
     tempos_proc = tempos_processamento(tabela_processos)
 
+    print('---Lista de Processos em formato de lista de dicionário---')
     print(tabela_processos)
-    print(tempos_proc)
+    print('---Lista de Processos em formato de tabela---')
+    print(list(tabela_processos[0].keys()))
+    for proc in tabela_processos:
+        print(list(proc.values()))
+    print('---Lista de Processos em formato de lista de dicionário com um campo por linha---')
+    pprint.pprint(tabela_processos)
+    #print(tempos_proc)
     #pprint.pprint(tempos_proc)
