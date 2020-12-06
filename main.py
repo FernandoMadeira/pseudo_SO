@@ -18,7 +18,7 @@ def main():
 
 
     gestor_filas.imprime(tabela_processos)
-    print(gestor_filas.temporeal(tabela_processos))
+    #print(gestor_filas.temporeal(tabela_processos))
 
     print('------------- Fila em cada tempo --------------------')
     for t in range(10):
