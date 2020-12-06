@@ -63,4 +63,41 @@ def escrever_bloco_memoria(bl_inicio, bl_tam, arq,  memoria = memoria):
         memoria[posicao] = arq
 
 
+def escrever_bloco_memoria_em_lote(posicoes, arq,  memoria = memoria):
+
+    for posicao in posicoes:
+        memoria[posicao] = arq
+
+
+def verifica_espaco_memoria_disponivel(tam_bloco, memoria = memoria):
+
+    blocos = [[0]]*tam_bloco
+    blocos_disp = blocos in [memoria[i:i + tam_bloco] for i in range(len(memoria) - 1)]
+
+    return blocos_disp
+
+
+def get_espaco_memoria_disponivel(tam_bloco):
+
+    espaco_disp = 0
+    posicoes = []
+
+    for posicao in range(len(memoria)):
+
+        if memoria[posicao] == [0] and espaco_disp != tam_bloco:
+            espaco_disp = espaco_disp+1
+            posicoes.append(posicao)
+
+        elif espaco_disp == tam_bloco:
+            print(' --- espaco encontrado ----- ')
+            print(posicoes)
+            return posicoes
+        else:
+            posicoes = []
+            espaco_disp = 0
+
+    if espaco_disp == tam_bloco:
+        return posicoes
+    else:
+        return 0
 
