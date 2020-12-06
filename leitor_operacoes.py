@@ -67,8 +67,8 @@ def get_blocos(linhas):
 
 #fazer uma função ADICIONAR PROCESSO EM MEMÓRIA: ok
 def adicionar_processo_memoria(proc,processos,t):
-
     processo_usuario = proc['prior'] in [1, 2, 3]
+
     if gerenciador_memoria.verifica_espaco_memoria_disponivel(proc['blocos'], processo_usuario):
         posicoes_mem = gerenciador_memoria.get_espaco_memoria_disponivel(proc['blocos'], processo_usuario)
         if posicoes_mem != 0:
