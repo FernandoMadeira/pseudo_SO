@@ -16,15 +16,26 @@ def escrever_disco(posicao, palavra):
     disco[posicao] = palavra
 
 
-def remover_processo_memoria(arq, pid, processo_usuario):
+def remover_arquivo_disco(arq, pid, processo_usuario):
 
     if (not processo_usuario) or (processo_usuario and verificar_arquivo_processo(arq, pid)):
         for posicao in range(len(disco)):
-            if disco[posicao][0] == arq:
+            if disco[posicao] == arq:
                 disco[posicao] = [0]
     else:
-        print('Arquivo não pertence ao Processo!')
+        print('Erro de remoção! Arquivo não pertence ao Processo!')
     return True
+
+
+#função ADICIONAR ARQUIVO
+def adicionar_arquivo_disco(arq, pid, tamanho):
+    if verifica_espaco_disco_disponivel(tamanho):
+        posicoes = get_espaco_disco_disponivel(tamanho)
+        if posicoes != 0:
+            escrever_bloco_disco_em_lote(posicoes, arq, pid)
+    else:
+        print('Erro! Disco insuficiente!')
+
 
 
 def get_bloco_disco_all():
