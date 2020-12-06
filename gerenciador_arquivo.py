@@ -1,7 +1,11 @@
+# lista Global com o Disco
 disco = []
+
+# lista Global com processos e seus arquivos
 disco_posicao_processo_arquivo = []
 
 
+# Funcao responsável por inicializar o Disco
 def criar_blocos_disco(blocos):
     print(' ---------- CRIANDO ESPACO EM DISCO! ---------- ')
     for i in range(blocos):
@@ -11,11 +15,7 @@ def criar_blocos_disco(blocos):
     return True
 
 
-def escrever_disco(posicao, palavra):
-
-    disco[posicao] = palavra
-
-
+# Funcao responsável remover um arquivo do Disco
 def remover_arquivo_disco(arq, pid, processo_usuario):
 
     if (not processo_usuario) or (processo_usuario and verificar_arquivo_processo(arq, pid)):
@@ -27,7 +27,7 @@ def remover_arquivo_disco(arq, pid, processo_usuario):
     return True
 
 
-#função ADICIONAR ARQUIVO
+# Funcao responsável por adicionar um arquivo em disco
 def adicionar_arquivo_disco(arq, pid, tamanho):
     if verifica_espaco_disco_disponivel(tamanho):
         posicoes = get_espaco_disco_disponivel(tamanho)
@@ -37,16 +37,18 @@ def adicionar_arquivo_disco(arq, pid, tamanho):
         print('Erro! Disco insuficiente!')
 
 
-
+# Funcao responsável por informar a situacao atual do disco
 def get_bloco_disco_all():
 
     return disco
 
 
+# Funcao responsável por informar a situacao dos processos e arquivos
 def get_disco_posicao_processo_arquivo():
     return disco_posicao_processo_arquivo
 
 
+# verifica se existe espaço disponivel em disco
 def verificar_disco(bl_inicio, bl_tam):
 
     for posicao in range(bl_inicio, bl_inicio+bl_tam):
@@ -56,23 +58,25 @@ def verificar_disco(bl_inicio, bl_tam):
     return True
 
 
+# Funcao responsável por processar as operacoes em disco
 def processar_operacoes_disco(operacoes):
 
     for opr in operacoes:
         if verificar_disco(opr['bl_inicio'], opr['bl_tam']):
             escrever_bloco_disco(opr['bl_inicio'], opr['bl_tam'], opr['arq'])
-            print('Arquivo salvo')
         else:
             print('Erro! Espaço não disponivel')
 
 
+# Funcao responsável por escrever no disco em blocos
 def escrever_bloco_disco(bl_inicio, bl_tam, arq):
 
     for posicao in range(bl_inicio, bl_inicio+bl_tam):
         disco[posicao] = [arq]
 
 
-def escrever_bloco_disco_em_lote(posicoes, arq, pid, disco = disco):
+# Funcao responsável por escrever arquivos no disco
+def escrever_bloco_disco_em_lote(posicoes, arq, pid):
 
     for posicao in posicoes:
         disco[posicao] = [arq]
@@ -80,6 +84,7 @@ def escrever_bloco_disco_em_lote(posicoes, arq, pid, disco = disco):
     disco_posicao_processo_arquivo.append([arq, pid])
 
 
+# verifica se existe espaço disponivel em disco
 def verifica_espaco_disco_disponivel(tam_bloco):
 
     blocos = [[0]]*tam_bloco
@@ -87,11 +92,15 @@ def verifica_espaco_disco_disponivel(tam_bloco):
 
     return blocos_disp
 
+
+# Verifica se o processo de usuario é dono do arquivo em disco
 def verificar_arquivo_processo(arq, pid):
     disp = [arq, pid] in disco_posicao_processo_arquivo
 
     return disp
 
+
+# Funcao responsável por retornar os espaços disponiveis em disco
 def get_espaco_disco_disponivel(tam_bloco):
 
     espaco_disp = 0

@@ -1,7 +1,6 @@
 import gestor_filas
 import gerenciador_arquivo
 import gerenciador_memoria
-import leitor_operacoes
 
 def processos_inicializados(processos):
     for proc in processos:
@@ -24,7 +23,7 @@ def status_processo(processo,processos,tempo):
 
 
 def efetua_operacoes(proc,processos,operacoes,t):
-    if leitor_operacoes.adicionar_processo_memoria(proc,processos,t): #gerenciador_memoria.verifica_espaco_memoria_disponivel(64, False)
+    if gerenciador_memoria.adicionar_processo_memoria(proc,processos,t): #gerenciador_memoria.verifica_espaco_memoria_disponivel(64, False)
         #ADICIONAR PROCESSO NA MEMÓRIA
         processo_usuario = proc['prior'] in [1, 2, 3]
         if status_processo(proc, processos, t) == 'Em execução' and proc['tempo_proc'] > 0:

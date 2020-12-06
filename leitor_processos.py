@@ -61,6 +61,7 @@ def lista_atributo(tabela, campo):
 
 def main(endereco, arquivo):
 
+    print(arquivo)
     processos = ler_arquivo(endereco, arquivo)
     tabela_processos = montar_tabela_processos(processos)
     tempos_proc = tempos_processamento(tabela_processos)

@@ -1,5 +1,5 @@
 import os
-import leitor_operacoes
+import gestor_operacoes
 import leitor_processos
 import gerenciador_memoria
 import gestor_filas
@@ -31,9 +31,9 @@ def main():
         print(leitor_processos.lista_atributo(gestor_filas.filatempo(tabela_processos,t),'pid'))
 
     print(' ---------------------- Lendo Operacoes ---------------------- ')
-    leitor_operacoes.main(endereco, arquivo)
+    gestor_operacoes.main(endereco, arquivo)
 
-    print(' ---------------------- Blocos de memoria ---------------------- ')
+    #print(' ---------------------- Blocos de memoria ---------------------- ')
     bloco_memoria = gerenciador_memoria.get_bloco_memoria_all()
     #print(bloco_memoria)
 

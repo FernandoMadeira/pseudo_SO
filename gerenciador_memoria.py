@@ -1,6 +1,8 @@
+# lista Global Com a Memória
 memoria = []
 
 
+# Funcao responsável por inicializar a memória
 def criar_espaco_memoria():
     print(' ---------- CRIANDO ESPACO DE MEMORIA! ---------- ')
     for i in range(1024):
@@ -10,6 +12,7 @@ def criar_espaco_memoria():
     return True
 
 
+# Funcao responsável por remover o processos da memória
 def remover_processo_memoria(pid):
 
     for posicao in range(len(memoria)):
@@ -17,25 +20,21 @@ def remover_processo_memoria(pid):
             memoria[posicao] = 0
 
 
+# Funcao responsável por retornar o estado atual da memoria
 def get_bloco_memoria_all():
 
     return memoria
 
 
-def escrever_bloco_memoria(bl_inicio, bl_tam, arq):
-
-    for posicao in range(bl_inicio, bl_inicio+bl_tam):
-        memoria[posicao] = arq
-
-
-def escrever_bloco_memoria_em_lote(posicoes, arq):
+# Funcao responsável por escrever na mémoria
+def escrever_bloco_memoria_em_lote(posicoes, pid):
 
     for posicao in posicoes:
-        memoria[posicao] = arq
+        memoria[posicao] = pid
 
 
+# Funcao retornar True ou False caso tenha o tamanho de blocos disponiveis
 def verifica_espaco_memoria_disponivel(tam_bloco, processo_usuario):
-    # Retorna True ou False caso tenha o tamanho de blocos disponiveis
 
     if processo_usuario:
         # remove os 64 primeiros blocos que estao reservados para processos em tempo real
@@ -50,6 +49,7 @@ def verifica_espaco_memoria_disponivel(tam_bloco, processo_usuario):
     return blocos_disp
 
 
+# Funcao responsavel por retornar os espacoes de memoria disponivel
 def get_espaco_memoria_disponivel(tam_bloco, processo_usuario):
 
     espaco_disp = 0
@@ -79,3 +79,16 @@ def get_espaco_memoria_disponivel(tam_bloco, processo_usuario):
     else:
         return 0
 
+
+# Funcao responsavel por adcionar o processo na memoria
+def adicionar_processo_memoria(proc,processos,t):
+    processo_usuario = proc['prior'] in [1, 2, 3]
+
+    if verifica_espaco_memoria_disponivel(proc['blocos'], processo_usuario):
+        posicoes_mem = get_espaco_memoria_disponivel(proc['blocos'], processo_usuario)
+        if posicoes_mem != 0:
+            escrever_bloco_memoria_em_lote(posicoes_mem, '1')
+            return True
+        else:
+            print('Erro! Memoria insuficiente!')
+            return False
