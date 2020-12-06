@@ -35,7 +35,7 @@ def main():
 
     print(' ---------------------- Blocos de memoria ---------------------- ')
     bloco_memoria = gerenciador_memoria.get_bloco_memoria_all()
-    print(bloco_memoria)
+    #print(bloco_memoria)
 
 
 if __name__ == "__main__":
