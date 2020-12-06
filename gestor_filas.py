@@ -52,7 +52,7 @@ def temporeal(procs):
 def temporealt(procs,prioridade,tempo):
     procstemporealt = []
     for i in range(len(procs)):
-        if procs[i]['prior']<=prioridade and (procs[i]['tempo_inic']<=tempo and procs[i]['tempo_inic'] + procs[i]['tempo_proc'] >= tempo):
+        if procs[i]['prior']<=prioridade and (procs[i]['tempo_inic']<=tempo and procs[i]['tempo_inic'] + procs[i]['tempo_proc'] > tempo):
             procstemporealt = procstemporealt + [procs[i]]
     return procstemporealt
 
@@ -100,3 +100,12 @@ def preempta(processo,processos,tempo):
         return False
     else:
         return True
+
+def filatempo(procs,tempo):
+    filatempo = []
+    for i in range(len(procs)):
+        if (procs[i]['tempo_inic'] <= int(tempo)) and ((procs[i]['tempo_inic'] + procs[i]['tempo_proc']) > int(tempo)):
+            filatempo.append(procs[i])
+    filaordenada = fila(filatempo)
+    #print(filaordenada)
+    return filaordenada
