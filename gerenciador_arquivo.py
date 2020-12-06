@@ -1,7 +1,7 @@
 disco = []
 
 
-def criar_blocos_disco(blocos, disco = disco):
+def criar_blocos_disco(blocos):
     print(' ---------- CRIANDO ESPACO EM DISCO! ---------- ')
     for i in range(blocos):
         disco.append([0])
@@ -10,31 +10,30 @@ def criar_blocos_disco(blocos, disco = disco):
     return True
 
 
-def inicializar_espaco_disco(segmentos):
-    print(' ---------- INIALIZANDO ESPACOS DE disco! ---------- ')
-    for posicao in range(segmentos):
-        escrever_disco(posicao, [1])
-
-    print(' ---------- disco INICIALIZADA COM SUCESSO! ---------- ')
-    return True
-
-
-def escrever_disco(posicao, palavra, disco = disco):
+def escrever_disco(posicao, palavra):
 
     disco[posicao] = palavra
 
 
-def deletar_disco( posicao , disco = disco):
+def remover_processo_memoria(arq, pid, processo_usuario):
 
-    disco[posicao] = [0]
+    for posicao in range(len(disco)):
+        if processo_usuario:
+            if disco[posicao][0] == arq and disco[posicao][1] == pid:
+                disco[posicao] = [0]
+        else:
+            if disco[posicao][0] == arq and disco[posicao][1] == pid:
+
+                disco[posicao] = [0]
+    return True
 
 
-def get_bloco_disco_all( disco = disco):
+def get_bloco_disco_all():
 
     return disco
 
 
-def verificar_disco(bl_inicio, bl_tam, disco = disco):
+def verificar_disco(bl_inicio, bl_tam):
 
     for posicao in range(bl_inicio, bl_inicio+bl_tam):
         if disco[posicao] != [0]:
@@ -53,19 +52,19 @@ def processar_operacoes_disco(operacoes):
             print('Erro! Espaço não disponivel')
 
 
-def escrever_bloco_disco(bl_inicio, bl_tam, arq,  disco = disco):
+def escrever_bloco_disco(bl_inicio, bl_tam, arq):
 
     for posicao in range(bl_inicio, bl_inicio+bl_tam):
         disco[posicao] = arq
 
 
-def escrever_bloco_disco_em_lote(posicoes, arq,  disco = disco):
+def escrever_bloco_disco_em_lote(posicoes, arq):
 
     for posicao in posicoes:
         disco[posicao] = arq
 
 
-def verifica_espaco_disco_disponivel(tam_bloco, disco = disco):
+def verifica_espaco_disco_disponivel(tam_bloco):
 
     blocos = [[0]]*tam_bloco
     blocos_disp = blocos in [disco[i:i + tam_bloco] for i in range(len(disco) - 1)]

@@ -1,7 +1,7 @@
 memoria = []
 
 
-def criar_espaco_memoria( memoria = memoria):
+def criar_espaco_memoria():
     print(' ---------- CRIANDO ESPACO DE MEMORIA! ---------- ')
     for i in range(256):
         memoria.append(0)
@@ -10,29 +10,31 @@ def criar_espaco_memoria( memoria = memoria):
     return True
 
 
-def deletar_memoria( posicao , memoria = memoria):
+def remover_processo_memoria(pid):
 
-    memoria[posicao] = 0
+    for posicao in range(len(memoria)):
+        if memoria[posicao] == pid:
+            memoria[posicao] = 0
 
 
-def get_bloco_memoria_all( memoria = memoria):
+def get_bloco_memoria_all():
 
     return memoria
 
 
-def escrever_bloco_memoria(bl_inicio, bl_tam, arq,  memoria = memoria):
+def escrever_bloco_memoria(bl_inicio, bl_tam, arq):
 
     for posicao in range(bl_inicio, bl_inicio+bl_tam):
         memoria[posicao] = arq
 
 
-def escrever_bloco_memoria_em_lote(posicoes, arq,  memoria = memoria):
+def escrever_bloco_memoria_em_lote(posicoes, arq):
 
     for posicao in posicoes:
         memoria[posicao] = arq
 
 
-def verifica_espaco_memoria_disponivel(tam_bloco, processo_usuario, memoria = memoria):
+def verifica_espaco_memoria_disponivel(tam_bloco, processo_usuario):
     # Retorna True ou False caso tenha o tamanho de blocos disponiveis
 
     if processo_usuario:
