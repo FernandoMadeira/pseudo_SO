@@ -20,6 +20,16 @@ def main():
     gestor_filas.imprime(tabela_processos)
     print(gestor_filas.temporeal(tabela_processos))
 
+    print('------------- Fila em cada tempo --------------------')
+    for t in range(10):
+        print('tempo '+str(t))
+        print(gestor_filas.filatempo(tabela_processos,t))
+    
+    print('------------- Fila em cada tempo PID --------------------')
+    for t in range(10):
+        print('tempo '+str(t))
+        print(leitor_processos.lista_atributo(gestor_filas.filatempo(tabela_processos,t),'pid'))
+
     print(' ---------------------- Lendo Operacoes ---------------------- ')
     leitor_operacoes.main(endereco, arquivo)
 
