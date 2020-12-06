@@ -26,8 +26,8 @@ def status_processo(processo,processos,tempo):
 def efetua_operacoes(proc,processos,operacoes,t):
     if leitor_operacoes.tem_memoria(proc,processos,t): #gerenciador_memoria.verifica_espaco_memoria_disponivel(64, False)
         #ADICIONAR PROCESSO NA MEMÓRIA
-        processo_usuario == proc['prior'] in [1,2,3]
-        if status_processo(processo,processos,tempo) == 'Em execução' and proc['tempo_proc']>0:
+        processo_usuario = proc['prior'] in [1,2,3]
+        if status_processo(proc,processos,t) == 'Em execução' and proc['tempo_proc']>0:
             if proc['exec'] == 0: #primeira_execucao(proc,processos):   #criar essa função
                 primeira_execucao(proc)
                 for opr in operacoes:
