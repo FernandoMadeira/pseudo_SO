@@ -106,6 +106,10 @@ def filatempo(procs,tempo):
     for i in range(len(procs)):
         if (procs[i]['tempo_inic'] <= int(tempo)) and ((procs[i]['tempo_inic'] + procs[i]['tempo_proc']) > int(tempo)):
             filatempo.append(procs[i])
+        if len(filatempo)>1000:
+            print('Fila cheia!! 1000 processos!')
+            filatempo.pop(1000)
+            break
     filaordenada = fila(filatempo)
     #print(filaordenada)
     return filaordenada
