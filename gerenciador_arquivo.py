@@ -1,4 +1,5 @@
 disco = []
+disco_posicao_processo_arquivo = []
 
 
 def criar_blocos_disco(blocos):
@@ -17,20 +18,22 @@ def escrever_disco(posicao, palavra):
 
 def remover_processo_memoria(arq, pid, processo_usuario):
 
-    for posicao in range(len(disco)):
-        if processo_usuario:
-            if disco[posicao][0] == arq and disco[posicao][1] == pid:
+    if (not processo_usuario) or (processo_usuario and verificar_arquivo_processo(arq, pid)):
+        for posicao in range(len(disco)):
+            if disco[posicao][0] == arq:
                 disco[posicao] = [0]
-        else:
-            if disco[posicao][0] == arq and disco[posicao][1] == pid:
-
-                disco[posicao] = [0]
+    else:
+        print('Arquivo não pertence ao Processo!')
     return True
 
 
 def get_bloco_disco_all():
 
     return disco
+
+
+def get_disco_posicao_processo_arquivo():
+    return disco_posicao_processo_arquivo
 
 
 def verificar_disco(bl_inicio, bl_tam):
@@ -55,13 +58,15 @@ def processar_operacoes_disco(operacoes):
 def escrever_bloco_disco(bl_inicio, bl_tam, arq):
 
     for posicao in range(bl_inicio, bl_inicio+bl_tam):
-        disco[posicao] = arq
+        disco[posicao] = [arq]
 
 
-def escrever_bloco_disco_em_lote(posicoes, arq):
+def escrever_bloco_disco_em_lote(posicoes, arq, pid, disco = disco):
 
     for posicao in posicoes:
-        disco[posicao] = arq
+        disco[posicao] = [arq]
+
+    disco_posicao_processo_arquivo.append([arq, pid])
 
 
 def verifica_espaco_disco_disponivel(tam_bloco):
@@ -71,6 +76,10 @@ def verifica_espaco_disco_disponivel(tam_bloco):
 
     return blocos_disp
 
+def verificar_arquivo_processo(arq, pid):
+    disp = [arq, pid] in disco_posicao_processo_arquivo
+
+    return disp
 
 def get_espaco_disco_disponivel(tam_bloco):
 

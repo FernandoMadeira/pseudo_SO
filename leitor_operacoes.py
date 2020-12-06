@@ -91,12 +91,13 @@ def main(endereco, arquivo):
     print(' ---------------- Preenchendo espacos em Disco ---------------- ')
     gerenciador_arquivo.processar_operacoes_disco(tabela)
 
-    if gerenciador_arquivo.verifica_espaco_disco_disponivel(3):
-        posicoes = gerenciador_arquivo.get_espaco_disco_disponivel(3)
-        if posicoes != 0:
-            gerenciador_arquivo.escrever_bloco_disco_em_lote(posicoes, 'A')
-    else:
-        print('Erro! Memoria insuficiente!')
+    # if gerenciador_arquivo.verifica_espaco_disco_disponivel(3):
+    #     posicoes = gerenciador_arquivo.get_espaco_disco_disponivel(3)
+    #     if posicoes != 0:
+    #         pid = 1
+    #         gerenciador_arquivo.escrever_bloco_disco_em_lote(posicoes, 'A', pid)
+    # else:
+    #     print('Erro! Disco insuficiente!')
 
     print(' ---------------- Memoria ---------------- ')
     memoria_atual = gerenciador_memoria.get_bloco_memoria_all()
@@ -105,6 +106,16 @@ def main(endereco, arquivo):
     print(' ---------------- Disco ---------------- ')
     disco_atual = gerenciador_arquivo.get_bloco_disco_all()
     print(disco_atual)
+
+    # print(' ---------------- Mapa de Arquivo Processo ---------------- ')
+    # disco_atual = gerenciador_arquivo.get_disco_posicao_processo_arquivo()
+    # print(disco_atual)
+    #
+    # gerenciador_arquivo.remover_processo_memoria('A', 2, True)
+
+    # print(' ---------------- Disco DELETE ---------------- ')
+    # disco_atual = gerenciador_arquivo.get_bloco_disco_all()
+    # print(disco_atual)
 
     # print('Arquivos')
     # print(tabela)

@@ -3,7 +3,7 @@ memoria = []
 
 def criar_espaco_memoria():
     print(' ---------- CRIANDO ESPACO DE MEMORIA! ---------- ')
-    for i in range(256):
+    for i in range(1024):
         memoria.append(0)
     print(' ---------- ESPACO DE MEMORIA CRIADO COM SUCESSO! ---------- ')
 

@@ -1,4 +1,6 @@
 import gestor_filas
+import gerenciador_arquivo
+import gerenciador_memoria
 
 
 def status_processo(processo,processos,tempo):
@@ -19,7 +21,7 @@ def efetua_operacoes(proc,processos,t):
                 if proc['oper']=='1':
                     arq_removido = proc['arq']
                     remover_arquivo(arq_removido)      #criar essa função dentro do sistema de arquivos
-                elif tab[j]['oper']=='0':
+                elif tab[j]['oper'] == '0':
                     arq_adicionado = tab[j]['arq']
                     adicionar_arquivo(arq_adicionado)      #criar essa função dentro do sistema de arquivos
                 else:
