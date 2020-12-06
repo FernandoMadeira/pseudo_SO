@@ -89,14 +89,14 @@ def fila(procs):
     procsord1 = sorted(procs, key=lambda k: (k['tempo_inic'], k['prior']))
     return procsord1
 
-def preempta(processo,tempo):
+def preempta(processo,processos,tempo):
     if processo['prior'] == 0:
         return False
-    elif processo['prior'] == 1 and temporealt(processo,0,tempo) == []:
+    elif processo['prior'] == 1 and temporealt(processos,0,tempo) == []:
         return False
-    elif processo['prior'] == 2 and temporealt(processo,1,tempo) == []:
+    elif processo['prior'] == 2 and temporealt(processos,1,tempo) == []:
         return False
-    elif processo['prior'] == 3 and temporealt(processo,2,tempo) == []:
+    elif processo['prior'] == 3 and temporealt(processos,2,tempo) == []:
         return False
     else:
         return True
