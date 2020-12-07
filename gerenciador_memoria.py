@@ -5,7 +5,7 @@ memoria = []
 # Funcao responsável por inicializar a memória
 def criar_espaco_memoria():
     #print(' ---------- CRIANDO ESPACO DE MEMORIA! ---------- ')
-    for i in range(256):
+    for i in range(1024):
         memoria.append([])
     #print(' ---------- ESPACO DE MEMORIA CRIADO COM SUCESSO! ---------- ')
 
