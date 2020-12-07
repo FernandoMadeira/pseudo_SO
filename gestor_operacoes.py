@@ -32,7 +32,7 @@ def ler_operacoes_disco(linhas):
     for lin in linhas[2:(segmentos+2)]:
         dados = {}
         coluna = lin.split(', ')
-        dados['arq'] = coluna[0]
+        dados['arq'] = coluna[0].strip()
         dados['bl_inicio'] = int(coluna[1])
         dados['bl_tam'] = int(coluna[2].rstrip('\n'))
         tabela1=tabela1+[dados]
@@ -51,8 +51,8 @@ def ler_operacoes_processo(linhas):
         dados = {}
         coluna = lin.split(', ')
         dados['pid'] = int(coluna[0])
-        dados['oper'] = coluna[1]
-        dados['arq'] = coluna[2].rstrip('\n')
+        dados['oper'] = coluna[1].strip()
+        dados['arq'] = coluna[2].rstrip('\n').strip()
         if int(dados['oper']) == 0:
             dados['blocos'] = int(coluna[3].rstrip('\n'))
         tab = tab+[dados]

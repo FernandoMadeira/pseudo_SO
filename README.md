@@ -8,3 +8,5 @@
     Na linha 9 altere a variavel 'endereco' para o caminho onde encontram-se os arquivos de processos e operações.
     Execute a main.py   
     
+## Arquivos
+    ATENÇÃO! Remova todas as linhas em branco ao final dos arquivos de Processos e Operações!
