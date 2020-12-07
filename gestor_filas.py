@@ -44,31 +44,37 @@ def imprime(procs):
     print(usuario(procs))
     print('------------ ----------------------- --------------')
 
+
 def fila(procs):
     procsord1 = sorted(procs, key=lambda k: (k['tempo_inic'], k['prior']))
     return procsord1
 
-def preempta(processo,processos,tempo):
+
+def preempta(processo, processos, tempo):
     if processo['prior'] == 0:
         return False
-    elif processo['prior'] == 1 and temporealt(processos,0,tempo) == []:
+    elif processo['prior'] == 1 and temporealt(processos, 0, tempo) == []:
         return False
-    elif processo['prior'] == 2 and temporealt(processos,1,tempo) == []:
+    elif processo['prior'] == 2 and temporealt(processos, 1, tempo) == []:
         return False
-    elif processo['prior'] == 3 and temporealt(processos,2,tempo) == []:
+    elif processo['prior'] == 3 and temporealt(processos, 2, tempo) == []:
         return False
     else:
         return True
 
-def filatempo(procs,tempo):
+
+def filatempo(procs, tempo):
+
     filatempo = []
-    for i in range(len(procs)):
-        if procs[i]['tempo_inic'] <= int(tempo) and procs[i]['tempo_proc'] > 0:
+
+    for i in range(len(procs)):                                        # 3                               4
+        if procs[i]['tempo_inic'] <= int(tempo) and procs[i]['tempo_inic']+procs[i]['tempo_proc']+1 >= tempo:
             filatempo.append(procs[i])
-        if len(filatempo)>1000:
+        if len(filatempo) > 1000:
             print('Fila cheia!! 1000 processos!')
             filatempo.pop(1000)
             break
+
     filaordenada = fila(filatempo)
     #print(filaordenada)
     return filaordenada

@@ -4,17 +4,16 @@ memoria = []
 
 # Funcao responsável por inicializar a memória
 def criar_espaco_memoria():
-    print(' ---------- CRIANDO ESPACO DE MEMORIA! ---------- ')
-    for i in range(1024):
+    #print(' ---------- CRIANDO ESPACO DE MEMORIA! ---------- ')
+    for i in range(256):
         memoria.append([])
-    print(' ---------- ESPACO DE MEMORIA CRIADO COM SUCESSO! ---------- ')
+    #print(' ---------- ESPACO DE MEMORIA CRIADO COM SUCESSO! ---------- ')
 
     return True
 
 
 # Funcao responsável por remover o processos da memória
 def remover_processo_memoria(pid):
-
     for posicao in range(len(memoria)):
         if memoria[posicao] == pid:
             memoria[posicao] = []
@@ -61,9 +60,7 @@ def get_espaco_memoria_disponivel(tam_bloco, processo_usuario):
     else:
         range_ini = 0
 
-
     for posicao in range(range_ini, range_fim):
-
         if memoria[posicao] == [] and espaco_disp < tam_bloco:
             espaco_disp = espaco_disp+1
             posicoes.append(posicao)
@@ -81,7 +78,7 @@ def get_espaco_memoria_disponivel(tam_bloco, processo_usuario):
 
 
 # Funcao responsavel por adcionar o processo na memoria
-def adicionar_processo_memoria(proc,processos,t):
+def adicionar_processo_memoria(proc):
     processo_usuario = proc['prior'] in [1, 2, 3]
 
     if verifica_espaco_memoria_disponivel(proc['blocos'], processo_usuario):

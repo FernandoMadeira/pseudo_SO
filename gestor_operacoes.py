@@ -54,7 +54,7 @@ def ler_operacoes_processo(linhas):
         dados['oper'] = coluna[1]
         dados['arq'] = coluna[2].rstrip('\n')
         if int(dados['oper']) == 0:
-            dados['blocos'] = coluna[3].rstrip('\n')
+            dados['blocos'] = int(coluna[3].rstrip('\n'))
         tab = tab+[dados]
     return tab
 

@@ -7,23 +7,24 @@ disco_posicao_processo_arquivo = []
 
 # Funcao responsável por inicializar o Disco
 def criar_blocos_disco(blocos):
-    print(' ---------- CRIANDO ESPACO EM DISCO! ---------- ')
+    #print(' ---------- CRIANDO ESPACO EM DISCO! ---------- ')
     for i in range(blocos):
         disco.append([0])
 
-    print(' ---------- ESPACO EM DISCO CRIADO COM SUCESSO! ---------- ')
+    #print(' ---------- ESPACO EM DISCO CRIADO COM SUCESSO! ---------- ')
     return True
 
 
 # Funcao responsável remover um arquivo do Disco
 def remover_arquivo_disco(arq, pid, processo_usuario):
 
-    if (not processo_usuario) or (processo_usuario and verificar_arquivo_processo(arq, pid)):
-        for posicao in range(len(disco)):
-            if disco[posicao] == arq:
-                disco[posicao] = [0]
-    else:
-        print('Erro de remoção! Arquivo não pertence ao Processo!')
+    #if (not processo_usuario) or (processo_usuario and verificar_arquivo_processo(arq, pid)):
+    for posicao in range(len(disco)):
+        if disco[posicao] == [arq]:
+            disco[posicao] = [0]
+    print('O processo '+str(pid)+' deletou o arquivo '+arq)
+    # else:
+    #     print('Erro de remoção! Arquivo não pertence ao Processo!')
     return True
 
 
@@ -31,10 +32,11 @@ def remover_arquivo_disco(arq, pid, processo_usuario):
 def adicionar_arquivo_disco(arq, pid, tamanho):
     if verifica_espaco_disco_disponivel(tamanho):
         posicoes = get_espaco_disco_disponivel(tamanho)
+        print('O processo '+str(pid)+' criou o arquivo '+arq+' (blocos '+str(posicoes)+ ').')
         if posicoes != 0:
             escrever_bloco_disco_em_lote(posicoes, arq, pid)
     else:
-        print('Erro! Disco insuficiente!')
+        print('O processo '+str(pid)+' não pode criar o arquivo '+arq+' falta de espaço.')
 
 
 # Funcao responsável por informar a situacao atual do disco
@@ -87,7 +89,7 @@ def escrever_bloco_disco_em_lote(posicoes, arq, pid):
 # verifica se existe espaço disponivel em disco
 def verifica_espaco_disco_disponivel(tam_bloco):
 
-    blocos = [[0]]*tam_bloco
+    blocos = [[0]]*int(tam_bloco)
     blocos_disp = blocos in [disco[i:i + tam_bloco] for i in range(len(disco) - 1)]
 
     return blocos_disp

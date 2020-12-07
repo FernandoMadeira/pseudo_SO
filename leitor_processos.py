@@ -61,18 +61,8 @@ def lista_atributo(tabela, campo):
 
 def main(endereco, arquivo):
 
-    print(arquivo)
     processos = ler_arquivo(endereco, arquivo)
     tabela_processos = montar_tabela_processos(processos)
-    #tempos_proc = tempos_processamento(tabela_processos)
 
-    print('---Lista de Processos em formato de lista de dicionário---')
-    print(tabela_processos)
-    print('---Lista de Processos em formato de tabela---')
-    print(list(tabela_processos[0].keys()))
-    for proc in tabela_processos:
-        print(list(proc.values()))
-    print('---Lista de Processos em formato de lista de dicionário com um campo por linha---')
-    pprint.pprint(tabela_processos)
-    #print(tempos_proc)
-    #pprint.pprint(tempos_proc)
+    return tabela_processos
+
