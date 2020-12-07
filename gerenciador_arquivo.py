@@ -24,7 +24,7 @@ def remover_arquivo_disco(arq, pid, processo_usuario):
                     disco[posicao] = [0]
             print('O processo '+str(pid)+' deletou o arquivo '+arq)
         else:
-            print('Erro de remoção! Arquivo não pertence ao Processo '+str(pid))
+            print('Erro de remoção! Arquivo '+arq+' não pertence ao Processo '+str(pid))
 
         return True
     else:
