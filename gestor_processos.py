@@ -2,6 +2,7 @@ import gestor_filas
 import gerenciador_arquivo
 import gerenciador_memoria
 
+opr_executadas = []
 
 def processos_inicializados(processos):
     for proc in processos:
@@ -42,6 +43,15 @@ def dispatcher(processos, operacoes):
         print(' \n')
 
 
+def operacoes_sem_processo(operacoes, instrucao):
+
+    for opr in operacoes:
+        if operacoes.index(opr) not in opr_executadas:
+            print('Operação '+str(instrucao)+' => Falha')
+            print('Não existe o processo!')
+            instrucao = instrucao+1
+            print(' ')
+
 
 
 def status_processo(processo, processos, tempo):
@@ -60,7 +70,7 @@ def status_processo(processo, processos, tempo):
         return 'Lista Vazia'
 
 
-def efetua_operacoes(proc, processos, operacoes, t):
+def efetua_operacoes(proc, processos, operacoes, t, instrucao):
     stprocessamento = status_processo(proc, processos, t)
     if stprocessamento == 'Em execução' and proc['tempo_proc'] > 0:
         processo_usuario = proc['prior'] in [1, 2, 3]
@@ -73,12 +83,11 @@ def efetua_operacoes(proc, processos, operacoes, t):
 
                 index = processos.index(proc)
                 processos[index]['tempo_proc'] = proc['tempo_proc'] - 1
-                instrucao = 0
+
                 for opr in operacoes:
                     if opr['pid'] == proc['pid']:
                         instrucao = instrucao + 1
                         print('P'+str(proc['pid'])+' operação ' + str(instrucao))
-
                         if opr['oper'] == '1':
                             arq_removido = opr['arq']
                             gerenciador_arquivo.remover_arquivo_disco(arq_removido, opr['pid'], processo_usuario)    #remover_arquivo_disco(arq, pid, processo_usuario)  #criar essa função dentro do sistema de arquivos
@@ -88,6 +97,11 @@ def efetua_operacoes(proc, processos, operacoes, t):
                         else:
                             print('Operação desconhecida!')
                         print('')
+                        index_opr = operacoes.index(opr)
+                        opr_executadas.append(index_opr)
+
+                # operacoes.pop(opr_index)
+                # operacoes.remove(opr)
             else:
                 index = processos.index(proc)
                 processos[index]['tempo_proc'] = proc['tempo_proc'] - 1
@@ -97,21 +111,25 @@ def efetua_operacoes(proc, processos, operacoes, t):
                 processos.remove(proc)
                 gerenciador_memoria.remover_processo_memoria(proc['pid'])
 
-    return processos
+    return processos, operacoes, instrucao
 
 
 def executa(processos, operacoes):
 
     processos = processos_inicializados(processos)
     t = 0
+    instrucao = 0
     while len(processos) > 0:
         for proc in processos:
-            processos = efetua_operacoes(proc, processos, operacoes, t)
+            processos, operacoes, instrucao = efetua_operacoes(proc, processos, operacoes, t, instrucao)
 
         t = t + 1
         # gatilho de seguranca
-        if t > 100:
+        if t > 1000:
             break
+    # remove as operacoes já executadas
+    operacoes_sem_processo(operacoes, instrucao+1)
+
     print(' ---------------- Mapa de ocupação do disco: ---------------- ')
     print(gerenciador_arquivo.get_bloco_disco_all())
 
