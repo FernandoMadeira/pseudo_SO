@@ -17,15 +17,19 @@ def criar_blocos_disco(blocos):
 
 # Funcao responsável remover um arquivo do Disco
 def remover_arquivo_disco(arq, pid, processo_usuario):
+    if verifica_arquivo_existe(arq):
+        if (not processo_usuario) or (processo_usuario and verificar_arquivo_processo(arq, pid)):
+            for posicao in range(len(disco)):
+                if disco[posicao] == [arq]:
+                    disco[posicao] = [0]
+            print('O processo '+str(pid)+' deletou o arquivo '+arq)
+        else:
+            print('Erro de remoção! Arquivo não pertence ao Processo '+str(pid))
 
-    #if (not processo_usuario) or (processo_usuario and verificar_arquivo_processo(arq, pid)):
-    for posicao in range(len(disco)):
-        if disco[posicao] == [arq]:
-            disco[posicao] = [0]
-    print('O processo '+str(pid)+' deletou o arquivo '+arq)
-    # else:
-    #     print('Erro de remoção! Arquivo não pertence ao Processo!')
-    return True
+        return True
+    else:
+        print('O arquivo '+arq+' não existe no disco ')
+        return False
 
 
 # Funcao responsável por adicionar um arquivo em disco
@@ -76,6 +80,8 @@ def escrever_bloco_disco(bl_inicio, bl_tam, arq):
     for posicao in range(bl_inicio, bl_inicio+bl_tam):
         disco[posicao] = [arq]
 
+    disco_posicao_processo_arquivo.append([arq, '#'])
+
 
 # Funcao responsável por escrever arquivos no disco
 def escrever_bloco_disco_em_lote(posicoes, arq, pid):
@@ -97,7 +103,17 @@ def verifica_espaco_disco_disponivel(tam_bloco):
 
 # Verifica se o processo de usuario é dono do arquivo em disco
 def verificar_arquivo_processo(arq, pid):
-    disp = [arq, pid] in disco_posicao_processo_arquivo
+    disp1 = [arq, pid] in disco_posicao_processo_arquivo
+    disp2 = [arq, '#'] in disco_posicao_processo_arquivo
+
+    disp = disp1 or disp2
+
+    return disp
+
+
+# Verifica se o arquivo existe em disco
+def verifica_arquivo_existe(arq):
+    disp = [arq] in disco
 
     return disp
 

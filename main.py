@@ -1,4 +1,3 @@
-import os
 import gestor_operacoes
 import leitor_processos
 import gerenciador_memoria
@@ -13,11 +12,8 @@ def main():
     arquivo = 'files.txt'
     arquivo_processos = 'processes.txt'
 
-    print(' ------------ Lendo Processos      ---------------- ')
+    print(' ---------------- Lendo Processos ---------------- ')
     tabela_processos = leitor_processos.main(endereco, arquivo_processos)
-
-    #gestor_filas.imprime(tabela_processos)
-    #print(gestor_filas.temporeal(tabela_processos))
 
     # print('------------- Fila em cada tempo --------------------')
     # for t in range(10):
@@ -30,25 +26,19 @@ def main():
     #     print(leitor_processos.lista_atributo(gestor_filas.filatempo(tabela_processos,t),'pid'))
 
     # print(' ---------------------- Lendo Operacoes ---------------------- ')
-    #operacoes = gestor_operacoes.main(endereco, arquivo)
     gestor_operacoes.main(endereco, arquivo)
     linhas = gestor_operacoes.ler_arquivo(endereco, arquivo)
     operacoes = gestor_operacoes.ler_operacoes_processo(linhas)
 
-    #print(' ---------------------- Blocos de memoria ---------------------- ')
-    #bloco_memoria = gerenciador_memoria.get_bloco_memoria_all()
-    #print(bloco_memoria)
+    print(' ---------------- Dispatcher      ---------------- ')
+    gestor_processos.dispatcher(tabela_processos, operacoes)
+    # exit()
 
-    #teste
-    #filaordenada = gestor_filas.filatempo(tabela_processos,0)
-    #print('teeeste')
-    #print(filaordenada)
-
-
-    print('----------- Execução --------------------------------')
+    print(' ---------------- Execução ---------------- ')
+    print('Sistema de arquivos =>')
     gestor_processos.executa(tabela_processos, operacoes)
 
-    print(' --------- FIM ----------------')
+    print(' ---------------- FIM Execução ---------------- ')
 
 
 if __name__ == "__main__":

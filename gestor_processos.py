@@ -1,7 +1,6 @@
 import gestor_filas
 import gerenciador_arquivo
 import gerenciador_memoria
-import leitor_processos
 
 
 def processos_inicializados(processos):
@@ -14,6 +13,35 @@ def primeira_execucao(proc):
     proc['exec'] = 1
 
     return proc
+
+
+def dispatcher(processos, operacoes):
+
+    offset = 0
+    for process in processos:
+        print('Dispatcher => \n'
+              '       PID: '+str(process['pid'])+' \n'
+              '       offset: '+str(offset)+' \n'
+              '       blocks: ' + str(process['blocos']) + ' \n'
+              '       priority: ' + str(process['prior']) + ' \n'
+              '       time: ' + str(process['tempo_proc']) + ' \n'
+              '       printers: ' + str(process['cod_impr']) + ' \n'
+              '       scanners: ' + str(process['req_scan']) + ' \n'
+              '       modems: ' + str(process['req_modem']) + ' \n'
+              '       drivers: ' + str(process['cod_disco']) + ' \n')
+        print('Processo '+str(process['pid'])+' =>')
+        print('P' + str(process['pid']) + ' STARTED')
+        op_qtd = 0
+        for op in operacoes:
+            if op['pid'] == process['pid']:
+                op_qtd = op_qtd+1
+                print('P'+str(process['pid'])+' instruction '+str(op_qtd))
+
+        offset = offset + process['blocos']
+        print('P'+str(process['pid'])+' return SIGINT')
+        print(' \n')
+
+
 
 
 def status_processo(processo, processos, tempo):
@@ -49,7 +77,8 @@ def efetua_operacoes(proc, processos, operacoes, t):
                 for opr in operacoes:
                     if opr['pid'] == proc['pid']:
                         instrucao = instrucao + 1
-                        print('P'+str(proc['pid'])+' instruction ' + str(instrucao))
+                        print('P'+str(proc['pid'])+' operação ' + str(instrucao))
+
                         if opr['oper'] == '1':
                             arq_removido = opr['arq']
                             gerenciador_arquivo.remover_arquivo_disco(arq_removido, opr['pid'], processo_usuario)    #remover_arquivo_disco(arq, pid, processo_usuario)  #criar essa função dentro do sistema de arquivos
@@ -58,6 +87,7 @@ def efetua_operacoes(proc, processos, operacoes, t):
                             gerenciador_arquivo.adicionar_arquivo_disco(arq_adicionado, opr['pid'], opr['blocos'])      #criar essa função dentro do sistema de arquivos
                         else:
                             print('Operação desconhecida!')
+                        print('')
             else:
                 index = processos.index(proc)
                 processos[index]['tempo_proc'] = proc['tempo_proc'] - 1
@@ -82,8 +112,9 @@ def executa(processos, operacoes):
         # gatilho de seguranca
         if t > 100:
             break
-
-    print(' --------- Mapa de ocupação do disco:x ----------------')
+    print(' ---------------- Mapa de ocupação do disco: ---------------- ')
     print(gerenciador_arquivo.get_bloco_disco_all())
 
+    # print(' ---------------- Mapa de ocupação do disco arquivos e donos: ---------------- ')
+    # print(gerenciador_arquivo.get_disco_posicao_processo_arquivo())
 
