@@ -63,7 +63,7 @@ def preempta(processo,processos,tempo):
 def filatempo(procs,tempo):
     filatempo = []
     for i in range(len(procs)):
-        if (procs[i]['tempo_inic'] <= int(tempo)) and ((procs[i]['tempo_inic'] + procs[i]['tempo_proc']) > int(tempo)):
+        if procs[i]['tempo_inic'] <= int(tempo) and procs[i]['tempo_proc'] > 0:
             filatempo.append(procs[i])
         if len(filatempo)>1000:
             print('Fila cheia!! 1000 processos!')
