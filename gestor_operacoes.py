@@ -67,16 +67,16 @@ def get_blocos(linhas):
     return blocos
 
 
-def processos_sem_memoria(tabela_processos, operacoes):
+def processos_sem_memoria(tabela_processos):
 
     for proc in tabela_processos:
         if proc['blocos'] > 1023:
-            for op in operacoes:
-                if op['pid'] == proc['pid']:
-                    operacoes.remove(op)
+            # for op in operacoes:
+            #     if op['pid'] == proc['pid']:
+            #         operacoes.remove(op)
             tabela_processos.remove(proc)
 
-    return tabela_processos,operacoes
+    return tabela_processos
 
 
 # Main responsável por executar as operacoes

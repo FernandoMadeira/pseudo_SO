@@ -55,7 +55,7 @@ def operacoes_sem_processo(operacoes, instrucao):
     for opr in operacoes:
         if operacoes.index(opr) not in opr_executadas:
             print('Operação '+str(instrucao)+' => Falha')
-            print('Não existe o processo!')
+            print('O Processo '+str(opr['pid'])+' não existe ou não foi criado por falta de memória!')
             instrucao = instrucao+1
             print(' ')
 

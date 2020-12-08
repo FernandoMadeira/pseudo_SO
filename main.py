@@ -25,7 +25,7 @@ def main():
 
     print(' ---------------- Execução ---------------- ')
     print('Sistema de arquivos =>')
-    tabela_processos, operacoes = gestor_operacoes.processos_sem_memoria(tabela_processos, operacoes)
+    tabela_processos = gestor_operacoes.processos_sem_memoria(tabela_processos)
     gestor_processos.executa(tabela_processos, operacoes)
 
     print(' ---------------- FIM Execução ---------------- ')
