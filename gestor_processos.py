@@ -20,27 +20,34 @@ def dispatcher(processos, operacoes):
 
     offset = 0
     for process in processos:
-        print('Dispatcher => \n'
-              '       PID: '+str(process['pid'])+' \n'
-              '       offset: '+str(offset)+' \n'
-              '       blocks: ' + str(process['blocos']) + ' \n'
-              '       priority: ' + str(process['prior']) + ' \n'
-              '       time: ' + str(process['tempo_proc']) + ' \n'
-              '       printers: ' + str(process['cod_impr']) + ' \n'
-              '       scanners: ' + str(process['req_scan']) + ' \n'
-              '       modems: ' + str(process['req_modem']) + ' \n'
-              '       drivers: ' + str(process['cod_disco']) + ' \n')
-        print('Processo '+str(process['pid'])+' =>')
-        print('P' + str(process['pid']) + ' STARTED')
-        op_qtd = 0
-        for op in operacoes:
-            if op['pid'] == process['pid']:
-                op_qtd = op_qtd+1
-                print('P'+str(process['pid'])+' instruction '+str(op_qtd))
 
-        offset = offset + process['blocos']
-        print('P'+str(process['pid'])+' return SIGINT')
-        print(' \n')
+            print('Dispatcher => \n'
+                  '       PID: '+str(process['pid'])+' \n'
+                  '       offset: '+str(offset)+' \n'
+                  '       blocks: ' + str(process['blocos']) + ' \n'
+                  '       priority: ' + str(process['prior']) + ' \n'
+                  '       time: ' + str(process['tempo_proc']) + ' \n'
+                  '       printers: ' + str(process['cod_impr']) + ' \n'
+                  '       scanners: ' + str(process['req_scan']) + ' \n'
+                  '       modems: ' + str(process['req_modem']) + ' \n'
+                  '       drivers: ' + str(process['cod_disco']) + ' \n')
+            print('Processo '+str(process['pid'])+' =>')
+            if process['blocos'] < 1024:
+                print('P' + str(process['pid']) + ' STARTED')
+                op_qtd = 0
+                for op in operacoes:
+                    if op['pid'] == process['pid']:
+                        op_qtd = op_qtd+1
+                        print('P'+str(process['pid'])+' instruction '+str(op_qtd))
+
+                offset = offset + process['blocos']
+                print('P'+str(process['pid'])+' return SIGINT')
+                print(' \n')
+            else:
+                print('P'+str(process['pid'])+' Error => Memória insuficiente')
+                print(' \n')
+
+
 
 
 def operacoes_sem_processo(operacoes, instrucao):
@@ -110,6 +117,8 @@ def efetua_operacoes(proc, processos, operacoes, t, instrucao):
             if proc['tempo_proc'] == 0:
                 processos.remove(proc)
                 gerenciador_memoria.remover_processo_memoria(proc['pid'])
+        else:
+            processos.remove(proc)
 
     return processos, operacoes, instrucao
 

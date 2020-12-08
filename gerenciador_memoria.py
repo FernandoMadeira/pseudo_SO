@@ -89,3 +89,5 @@ def adicionar_processo_memoria(proc):
         else:
             print('Erro! Memoria insuficiente!')
             return False
+    else:
+        return False

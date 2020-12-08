@@ -67,6 +67,18 @@ def get_blocos(linhas):
     return blocos
 
 
+def processos_sem_memoria(tabela_processos, operacoes):
+
+    for proc in tabela_processos:
+        if proc['blocos'] > 1023:
+            for op in operacoes:
+                if op['pid'] == proc['pid']:
+                    operacoes.remove(op)
+            tabela_processos.remove(proc)
+
+    return tabela_processos,operacoes
+
+
 # Main responsável por executar as operacoes
 def main(endereco, arquivo):
     linhas = ler_arquivo(endereco, arquivo)
